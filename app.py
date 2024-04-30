@@ -1,5 +1,5 @@
 # save this as app.py
-from flask import Flask,render_template,request
+from flask import Flask,render_template,request,redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -28,9 +28,18 @@ def index():
     alltodo = Todo.query.all()
     return render_template('index.html',alltodo=alltodo)
 
-@app.route("/product")
-def product():
-    return "This is product"
+@app.route("/update")
+def update(sno):
+    return "redirect"
+    
+
+@app.route("/delete/<int:sno>")
+def delete(sno):
+    todo = db.get_or_404(Todo, sno)
+    if request.method == "GET":
+        db.session.delete(todo)
+        db.session.commit()
+    return redirect("/")
 
 if __name__ == '__main__':
    app.run(debug=True ,port=8000)
