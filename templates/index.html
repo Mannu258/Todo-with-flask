@@ -18,8 +18,9 @@
             <label for="exampleFormControlTextarea1" class="form-label">Todo description</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="textarea"></textarea>
           </div>
-        <button class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary">Submit</button><br><hr class="border border-primary border-3 opacity-75">
     </form>
+    {% if alltodo %}
       
       <h2 class="h3">Your Todos</h2>
       <table class="table">
@@ -46,6 +47,12 @@
             
           </tr>
           {% endfor %}
+          {% else %}
+          <br>
+          <div class="alert alert-secondary" role="alert">
+            No todos Found Add Todos
+          </div>
+          {% endif %}
         </tbody>
       </table>  
 
