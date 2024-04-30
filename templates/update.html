@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block bodyblock %}
+
+{% for todo in todo %}
+<div class="container py-4 px-3 mx-auto">
+    <h1>Update Todo!</h1>
+    <form action="/update/{{todo.s_no}}" method="post">
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Todo Title</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" name="title" value="{{todo.title}}">
+      </div>
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Todo description</label>
+        <input class="form-control" value="{{todo.desc}}" rows="3" name="textarea" >
+      </div>
+    <button class="btn btn-primary">Update</button><br><hr class="border border-primary border-3 opacity-75">
+</form>
+
+{%endfor%}
+{% endblock %}

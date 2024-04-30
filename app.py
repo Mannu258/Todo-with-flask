@@ -30,11 +30,22 @@ def index():
     alltodo = Todo.query.all()
     return render_template('index.html',alltodo=alltodo)
 
-@app.route("/update")
+@app.route("/update/<int:sno>" ,methods = ['GET','POST'])
 def update(sno):
-    return "redirect"
+    if request.method == "POST":
+        title = request.form['title']
+        desc = request.form['textarea']
+        if title and desc:
+            todo = Todo.query.filter_by(s_no=sno).first()
+            todo.title = title
+            todo.desc = desc
+            db.session.add(todo)
+            db.session.commit()  # Commit the changes once
+            return redirect("/")
+    todo = Todo.query.filter_by(s_no=sno)
+        
+    return render_template('update.html',todo=todo)
     
-
 @app.route("/delete/<int:sno>")
 def delete(sno):
     todo = db.get_or_404(Todo, sno)
